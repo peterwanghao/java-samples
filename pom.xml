@@ -16,6 +16,7 @@
 
 	<modules>
 		<module>archaius</module>
+		<module>utils</module>
 	</modules>
 
 	<dependencies>
