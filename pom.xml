@@ -9,6 +9,13 @@
 	<name>java-samples</name>
 	<description>Java 语言的一些示例代码</description>
 
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.6.RELEASE</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+
 	<properties>
 		<maven.compile.source>1.8</maven.compile.source>
 		<maven.compile.target>1.8</maven.compile.target>
@@ -17,6 +24,7 @@
 	<modules>
 		<module>archaius</module>
 		<module>utils</module>
+		<module>hoverfly</module>
 	</modules>
 
 	<dependencies>
