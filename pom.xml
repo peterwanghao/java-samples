@@ -26,6 +26,7 @@
 		<module>utils</module>
 		<module>hoverfly</module>
 		<module>elk-example-spring-boot</module>
+		<module>poi</module>
 	</modules>
 
 	<dependencies>
