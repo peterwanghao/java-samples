@@ -43,7 +43,7 @@ public class StringUtil {
 				System.out.println("equal3相等");
 			}
 			if (i instanceof String) {
-				System.out.println("is a String");
+				System.out.println("is String");
 			}else {
 				System.out.println("is Not String");
 			}
