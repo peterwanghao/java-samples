@@ -27,6 +27,7 @@
 		<module>hoverfly</module>
 		<module>elk-example-spring-boot</module>
 		<module>poi</module>
+		<module>netty</module>
 	</modules>
 
 	<dependencies>
