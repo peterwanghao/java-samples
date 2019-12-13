@@ -56,8 +56,10 @@ public class StringUtil {
 	}
 	
 	public static void main(String[] args) {
-		equal1(null,"abc");
-		equal2(null,"abc");
-		equal3(null,"abc");
+//		equal1(null,"abc");
+//		equal2(null,"abc");
+//		equal3(null,"abc");
+		System.out.println(System.getProperty("os.name"));
+		System.out.println(System.getProperty("os.arch"));
     }
 }
