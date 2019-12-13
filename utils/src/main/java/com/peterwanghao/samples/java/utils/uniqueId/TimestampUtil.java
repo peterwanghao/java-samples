@@ -61,6 +61,13 @@ public class TimestampUtil {
 		return Integer.valueOf(timestamp);
 	}
 
+	/**   
+	 * @Title: main
+	 * @Description: TODO(这里用一句话描述这个方法的作用)
+	 * @param: @param args
+	 * @return: void
+	 * @throws
+	 */
 	public static void main(String[] args) {
 		try {
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -71,7 +78,6 @@ public class TimestampUtil {
 			long base = cal.getTimeInMillis();
 			System.out.println("base : "+base);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -117,6 +123,29 @@ public class TimestampUtil {
 			System.out.println(d[i]);
 			System.out
 					.println(Arrays.toString(ByteToBit.getBooleanArray(d[i])));
+		}
+		
+		System.out.println("E------------------------------");
+		try {
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Calendar cal = Calendar.getInstance();
+			Date date1 = format.parse("2019-12-13 20:47:00");
+
+			cal.setTime(date1);
+			long base1 = cal.getTimeInMillis();
+			System.out.println("base1 : "+base1/1000/60);
+			
+			Date date2 = format.parse("2019-12-13 20:48:00");
+			cal.setTime(date2);
+			long base2 = cal.getTimeInMillis();
+			System.out.println("base2 : "+base2/1000/60);
+			
+			Date date3 = format.parse("2019-12-13 20:50:00");
+			cal.setTime(date3);
+			long base3 = cal.getTimeInMillis();
+			System.out.println("base3 : "+base3/1000/60);
+		} catch (ParseException e) {
+			e.printStackTrace();
 		}
 	}
 }
