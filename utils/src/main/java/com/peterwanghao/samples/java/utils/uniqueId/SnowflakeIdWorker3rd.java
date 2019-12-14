@@ -32,6 +32,9 @@ public class SnowflakeIdWorker3rd {
 	private int lastTimestamp = -1;
 
 	private final MinuteCounter counter = new MinuteCounter();
+	
+	/** 预支时间标志位 */
+	boolean isAdvance = false;
 
 	// ==============================Constructors=====================================
 	public SnowflakeIdWorker3rd() {
@@ -45,7 +48,7 @@ public class SnowflakeIdWorker3rd {
 	 * @return SnowflakeId
 	 */
 	public synchronized int nextId() {
-		boolean advance = true;
+		
 		
 		int timestamp = timeGen();
 		// 如果当前时间小于上一次ID生成的时间戳，说明系统时钟回退过这个时候应当抛出异常
@@ -54,26 +57,21 @@ public class SnowflakeIdWorker3rd {
 					"Clock moved backwards.  Refusing to generate id for %d milliseconds", lastTimestamp - timestamp));
 		}
 		
-		if (timestamp > counter.get()) {
+		if(timestamp > counter.get()) {
 			counter.set(timestamp);
-			advance = false;
-		} else if (timestamp == counter.get()) {
-			if (timestamp == lastTimestamp) {
-				advance = false;
-			} else {
-				advance = true;
-			}
-		} else {
-			lastTimestamp = timestamp;
+			isAdvance = false;
 		}
 
 		// 如果是同一时间生成的，则进行分钟内序列
-		if (lastTimestamp == timestamp) {
-			sequence = (sequence + 1) & sequenceMask;
+		if (lastTimestamp == timestamp || isAdvance) {
+			if(!isAdvance) {
+				sequence = (sequence + 1) & sequenceMask;
+			}
 
 			// 分钟内自增列溢出
-			if (sequence == 0 || advance) {
+			if (sequence == 0) {
 				// 预支下一个分钟,获得新的时间戳
+				isAdvance = true;
 				int laterTimestamp = counter.get();
 				if (laterSequence == 0) {
 					laterTimestamp = counter.incrementAndGet();
@@ -82,8 +80,6 @@ public class SnowflakeIdWorker3rd {
 				int nextId = ((laterTimestamp - twepoch) << timestampLeftShift) //
 						| laterSequence;
 				laterSequence = (laterSequence + 1) & sequenceMask;
-				System.out.println(
-						"newId : " + nextId + " laterTimestamp=" + laterTimestamp + " laterSequence=" + laterSequence);
 				return nextId;
 			}
 		}
@@ -97,10 +93,8 @@ public class SnowflakeIdWorker3rd {
 		lastTimestamp = timestamp;
 
 		// 移位并通过或运算拼到一起组成32位的ID
-		int oldId = ((timestamp - twepoch) << timestampLeftShift) //
+		return ((timestamp - twepoch) << timestampLeftShift) //
 				| sequence;
-		System.out.println("oldId : " + oldId + " timestamp=" + timestamp + " sequence=" + sequence);
-		return oldId;
 	}
 
 	/**
@@ -118,13 +112,6 @@ public class SnowflakeIdWorker3rd {
 	public static void main(String[] args) {
 		SnowflakeIdWorker3rd idWorker = new SnowflakeIdWorker3rd();
 		for (int i = 0; i < 1000; i++) {
-			if (i == 300) {
-				try {
-					Thread.sleep(1000 * 60 * 2);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
 			long id = idWorker.nextId();
 			System.out.println(i + ": " + id);
 		}
