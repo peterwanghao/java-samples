@@ -9,7 +9,8 @@ package com.peterwanghao.samples.java.utils.uniqueId;
  * 
  *          将产生的Id类型更改为Integer 32bit <br>
  *          把时间戳的单位改为分钟,使用25个比特的时间戳（分钟） <br>
- *          去掉机器ID和数据中心ID <比如> 7个比特作为自增值，即2的7次方等于128。
+ *          去掉机器ID和数据中心ID <br> 
+ *          7个比特作为自增值，即2的7次方等于128。
  */
 public class SnowflakeIdWorker3rd {
 	/** 开始时间戳 (2019-01-01) */
