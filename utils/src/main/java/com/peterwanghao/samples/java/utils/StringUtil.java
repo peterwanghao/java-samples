@@ -60,6 +60,15 @@ public class StringUtil {
 //		equal2(null,"abc");
 //		equal3(null,"abc");
 		System.out.println(System.getProperty("os.name"));
+		
+		String allFormula = "=VH_INDEX('HYMDYF','','','自动匹配','核算类,核算值','0','0','RMB','1')";
+		if (allFormula.indexOf("VH_INDEX") != -1) {
+			String formula = allFormula.substring(allFormula.indexOf("VH_INDEX("), allFormula.indexOf("')") + 2);
+			System.out.println(formula);
+			if (formula.indexOf("自动匹配") != -1) {
+				System.out.println("生成公式失败！" + formula);
+			}
+		}
 		System.out.println(System.getProperty("os.arch"));
     }
 }
