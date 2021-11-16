@@ -70,5 +70,6 @@ public class StringUtil {
 			}
 		}
 		System.out.println(System.getProperty("os.arch"));
+		System.out.println("------");
     }
 }
