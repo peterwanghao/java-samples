@@ -9,7 +9,7 @@ package com.peterwanghao.samples.java.utils;
  * 
  */
 public class StringUtil {
-
+	
 	public static void equal1(String i, String j) {
 		try {
 			if (i == j) {
@@ -70,5 +70,7 @@ public class StringUtil {
 			}
 		}
 		System.out.println(System.getProperty("os.arch"));
-    }
+		int num = Runtime.getRuntime().availableProcessors();
+		System.out.println(num);
+	}
 }
