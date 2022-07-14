@@ -1,5 +1,6 @@
 package com.peterwanghao.samples.java.utils.java;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -158,6 +159,25 @@ public class StreamDemo {
                 .collect(Collectors.partitioningBy(emp -> emp > 20));
         log.info("{}", partitioningMap);
         
+        // 类型转换
+        List<BigInteger> allList = new ArrayList<BigInteger>();
+        allList.add(BigInteger.valueOf(291788));
+        log.info("{}", allList);
+        
+        List<BigInteger> existList = new ArrayList<BigInteger>();
+        existList.add(BigInteger.valueOf(291758));
+        existList.add(BigInteger.valueOf(291759));
+        existList.add(BigInteger.valueOf(291760));
+        existList.add(BigInteger.valueOf(291761));
+        log.info("{}", existList);
+        
+        List<BigInteger> delList = null;
+		if(existList!=null && !existList.isEmpty()) {
+			delList = allList.stream().filter(item -> !existList.contains(item)).collect(Collectors.toList());
+		}else {
+			delList = allList;
+		}
+		log.info("{}", delList);
 	}
 	
 	public static List<Integer> buildList(final int size) {
