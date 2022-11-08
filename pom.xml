@@ -28,6 +28,7 @@
 		<module>elk-example-spring-boot</module>
 		<module>poi</module>
 		<module>netty</module>
+		<module>guava</module>
 	</modules>
 
 	<dependencies>
